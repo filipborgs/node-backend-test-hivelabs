@@ -9,4 +9,18 @@ export class UserRepository {
     await user.save()
     return user
   }
+
+  public async all (search: string): Promise<User[]> {
+    const UserModel = model<User>('User', UserDao)
+    const orConfig = { $regex: search , $options: 'i' }
+    const rs = UserModel.find({
+      $or: [
+        {
+          name: orConfig,
+          lastname: orConfig
+        }
+      ]
+    })
+    return rs
+  }
 }
