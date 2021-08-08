@@ -4,7 +4,9 @@ import Controller from '../protocols/controller'
 export const adaptRoute = (controller: Controller) => {
   return async (req: Request, res: Response) => {
     const request = {
-      body: { ...req.body }
+      body: { ...req.body },
+      params: { ...req.params },
+      query: { ...req.query }
     }
     const { statusCode, body } = await controller.handle(request)
     if (statusCode >= 200 && statusCode <= 299) {
