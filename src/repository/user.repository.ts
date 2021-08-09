@@ -23,4 +23,9 @@ export class UserRepository {
     })
     return rs
   }
+
+  public async findByNickname (nickname: string): Promise<User> {
+    const UserModel = model<User>('User', UserDao)
+    return UserModel.findOne({ nickname }, 'name lastname nickname').exec()
+  }
 }
