@@ -33,4 +33,12 @@ export class UserRepository {
     if (!user) { throw new NotFoudError('Usuario') }
     return await user.delete()
   }
+
+  public async updateNickname (newNick: string, id: string): Promise<User> {
+    const UserModel = model<User>('User', UserDao)
+    const user = await UserModel.findById(id)
+    user.nickname = newNick
+    user.updatedAt = new Date()
+    return await user.save()
+  }
 }
