@@ -12,17 +12,14 @@ export class UserRepository {
   }
 
   public async all (search: string): Promise<User[]> {
-    const UserModel = model<User>('User', UserDao)
+    const UserModel = model<User>('User', UserDao, 'users')
     const orConfig = { $regex: search , $options: 'i' }
-    const rs = UserModel.find({
+    return await UserModel.find({
       $or: [
-        {
-          name: orConfig,
-          lastname: orConfig
-        }
+        { name: orConfig },
+        { nickname: orConfig }
       ]
-    })
-    return rs
+    }).exec()
   }
 
   public async findByNickname (nickname: string): Promise<User> {
