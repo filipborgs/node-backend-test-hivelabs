@@ -4,3 +4,10 @@ export class NotFoudError extends Error {
     super.name = 'NotFoudError'
   }
 }
+
+export class MissingParamError extends Error {
+  constructor (param) {
+    super(`${param} ausente na requisição`)
+    super.name = 'MissingParamError'
+  }
+}
