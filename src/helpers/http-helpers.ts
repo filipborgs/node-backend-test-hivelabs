@@ -38,13 +38,13 @@ export const notFound = (error: Error): HttpResponse => {
 export const conflict = (error: Error): HttpResponse => {
   return {
     statusCode: 409,
-    body: error
+    body: error.message
   }
 }
 
 export const serverErro = (error: Error): HttpResponse => {
   return {
     statusCode: 500,
-    body: error
+    body: error.message
   }
 }
