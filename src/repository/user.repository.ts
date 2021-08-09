@@ -6,6 +6,8 @@ import { User } from '../model/user'
 export class UserRepository {
   public async save (userData: User): Promise<User> {
     const UserModel = model<User>('User', UserDao)
+    userData.updatedAt = new Date()
+    userData.createdAt = new Date()
     const user = new UserModel(userData)
     await user.save()
     return user
