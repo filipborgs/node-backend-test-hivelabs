@@ -41,4 +41,13 @@ export class UserRepository {
     user.updatedAt = new Date()
     return await user.save()
   }
+
+  public async update (userData: User, id: string): Promise<User> {
+    const UserModel = model<User>('User', UserDao)
+    const user = await UserModel.findById(id)
+    user.lastname = userData.lastname || user.lastname
+    user.address = userData.address || user.address
+    user.updatedAt = new Date()
+    return await user.save()
+  }
 }
