@@ -11,3 +11,10 @@ export class MissingParamError extends Error {
     super.name = 'MissingParamError'
   }
 }
+
+export class FieldTakenError extends Error {
+  constructor (field) {
+    super(`${field} já está sendo usado`)
+    super.name = 'FieldTakenError'
+  }
+}
