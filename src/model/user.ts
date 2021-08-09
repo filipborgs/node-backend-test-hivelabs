@@ -5,6 +5,6 @@ export interface User {
   nickname: string
   address: string
   bio: string
-  createdAt?: string
-  updatedAt?: string
+  createdAt?: Date
+  updatedAt?: Date
 }
