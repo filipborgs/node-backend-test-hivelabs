@@ -8,6 +8,7 @@ export const adaptRoute = (controller: Controller) => {
       params: { ...req.params },
       query: { ...req.query }
     }
+
     const { statusCode, body } = await controller.handle(request)
     if (statusCode >= 200 && statusCode <= 299) {
       res.status(statusCode).json(body)
