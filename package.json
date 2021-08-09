@@ -14,12 +14,14 @@
         "@types/express": "^4.17.13",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
+        "express-validator": "^6.12.1",
         "git-commit-msg-linter": "^3.2.6",
         "mongoose": "^5.13.5",
         "nodemon": "^2.0.12",
         "ts-node": "^10.1.0"
     },
     "devDependencies": {
+        "@types/express-validator": "^3.0.0",
         "@types/mongoose": "^5.11.97",
         "@types/node": "^16.4.13",
         "@typescript-eslint/eslint-plugin": "^4.29.0",
