@@ -1,6 +1,5 @@
 
 import mongoose from 'mongoose'
-console.log(`mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`)
 
 export default async (): Promise<any> => mongoose.connect(
   `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`, {
