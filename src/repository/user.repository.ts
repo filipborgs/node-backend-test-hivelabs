@@ -1,5 +1,6 @@
 import { model } from 'mongoose'
 import UserDao from '../dao/user.dao'
+import { NotFoudError } from '../exceptions/errors'
 import { User } from '../model/user'
 
 export class UserRepository {
@@ -27,5 +28,12 @@ export class UserRepository {
   public async findByNickname (nickname: string): Promise<User> {
     const UserModel = model<User>('User', UserDao)
     return UserModel.findOne({ nickname }, 'name lastname nickname').exec()
+  }
+
+  public async delete (id: string): Promise<User> {
+    const UserModel = model<User>('User', UserDao)
+    const user = await UserModel.findById(id)
+    if (!user) { throw new NotFoudError('Usuario') }
+    return await user.delete()
   }
 }
