@@ -1,0 +1,210 @@
+---
+openapi: 3.0.0
+info:
+  title: nodejs-backend-test-hivelabs
+  version: "1"
+servers:
+- url: https://virtserver.swaggerhub.com/filipborgs/nodejs-backend-test-hivelabs/1
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8000
+  description: SwaggerHub API Auto Mocking
+paths:
+  /:
+    get:
+      summary: Return a message
+      responses:
+        "200":
+          description: Message
+  /users:
+    get:
+      summary: Return all users
+      parameters:
+      - name: search
+        in: query
+        description: Query to search user by name or nickname
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Register new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_body'
+      responses:
+        "201":
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Bad params
+        "409":
+          description: Nickname conflict
+  /users/{nickname}:
+    get:
+      description: Return a user by nickname
+      parameters:
+      - name: nickname
+        in: path
+        description: The user nickname
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: User not found
+        "400":
+          description: Missing nickname
+  /users/{idUser}:
+    put:
+      description: Update a user
+      parameters:
+      - name: idUser
+        in: path
+        description: The user id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_idUser_body'
+      responses:
+        "200":
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Bad params
+        "409":
+          description: Nickname conflict
+    delete:
+      description: Delete a user by id
+      parameters:
+      - name: idUser
+        in: path
+        description: The user id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Successful operation
+        "404":
+          description: User not found
+        "400":
+          description: Missing id
+    patch:
+      description: Update a user nickname
+      parameters:
+      - name: idUser
+        in: path
+        description: The user id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_idUser_body_1'
+      responses:
+        "200":
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Bad params
+        "409":
+          description: Nickname conflict
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        nickname:
+          type: string
+        address:
+          type: string
+        bio:
+          type: string
+        updatedAt:
+          type: string
+        createdAt:
+          type: string
+      description: Full user object
+    users_body:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        nickname:
+          type: string
+        address:
+          type: string
+        bio:
+          type: string
+    inline_response_200:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        nickname:
+          type: string
+    users_idUser_body:
+      type: object
+      properties:
+        address:
+          type: string
+        lastname:
+          type: string
+    users_idUser_body_1:
+      type: object
+      properties:
+        newNickname:
+          type: string
